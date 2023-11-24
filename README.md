@@ -362,3 +362,153 @@ fun some(data : String) : Int {
 	return data!!.length
 }
 ```
+
+# 06. 뷰를 이용한 화면 구성
+
+생성일: 2023년 11월 17일 오전 12:16
+
+# 화면을 구성하는 방법
+
+### 액티비티-뷰 구조
+
+- 컴포넌트 중, 화면을 출력하는 컴포넌트는 **액티비티Activity** 뿐!
+- 액티비티 내 내용 표시는 **뷰View**를 통해 구성함 ex) ImageView, TextView (: View class)
+
+ 
+
+### 액티비티 코드로 화면 구성하기
+
+### 레이아웃 XML로 화면 구성하기
+
+# 뷰 클래스
+
+### 뷰 클래스의 기본 구조
+
+**뷰 객체의 계층 구조**
+
+![Untitled](06%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB%20%E1%84%80%E1%85%AE%E1%84%89%E1%85%A5%E1%86%BC%2074b6e577d23e42fd9e34be17950b0dcf/Untitled.png)
+
+- View : 뷰 클래스의 최상위 구조
+- ViewGroup : View의 하위 클래스, 자체 UI가 없어 화면에 나오지 않고 View 여러개를 묶어서 제어할 목적
+- TextView, ImageView… : 특정 UI를 출력할 목적으로 사용하는 클래스
+
+**뷰의 중첩 구조**
+
+- 레이아웃 클래스 : Linear Layout, ConstraintLayout, RelativeLayout… etc. 중첩하여 뷰를 복잡하게 구성할 수 있음
+- 객체를 계층 구조로 만들어서 이용하는 패턴 : **컴포지트 패턴(Composite pattern)** or **객체 모델 (document object model)**
+
+# 기본적인 뷰 살펴보기
+
+- **텍스트뷰** TextView
+- **이미지뷰** ImageView
+- **버튼, 체크박스, 라디오버튼** Button, CheckBox, RadioGroup(RadioButton)
+- **에디트 텍스트** EditText
+
+# 뷰 바인딩
+
+### 뷰 바인딩
+
+기존 : findViewById()를 이용해서 xml과 activity를 일일히 연결해주어야 함 → 무의미한 반복작업
+
+뷰 바인딩 : 레이아웃 xml 파일에 선언한 뷰 객체를 코드에서 쉽게 이용
+
+### How to?
+
+```kotlin
+android {
+	// 생략...
+	viewBinding{
+		enable = true
+	}
+}
+// build.gradle
+```
+
+⚠️ 교재에는 enabled라 되어 있으나, enable 로 해야 함 (API 업데이트의 문제인 듯) + 컴파일 버을 34로 변경
+
+### MainActivity
+
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // 기존
+        // setContentView(R.layout.activity_main)
+
+        // 바인딩 객체 획득하기
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        // 액티비티 화면 출력
+        setContentView(binding.root)
+
+        binding.testTextView.setText("뷰 바인딩 성공!")
+
+    }
+}
+```
+
+# 카카오톡 비민번호 확인 화면 만들기
+
+### 예제 따라하기
+
+### Code
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16sp"
+    tools:context=".KakaotalkPWActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_desc"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="leesoyoung0112@gmail.com"
+        android:textColor="#CFCFCE"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#D4D4D3"
+        android:layout_marginTop="10sp"
+        />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:text="@string/password_txt" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16sp"
+        android:text="확인" />
+</LinearLayout>
+```
+
+### Design
+
+![Untitled](06%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB%20%E1%84%80%E1%85%AE%E1%84%89%E1%85%A5%E1%86%BC%2074b6e577d23e42fd9e34be17950b0dcf/Untitled%201.png)
