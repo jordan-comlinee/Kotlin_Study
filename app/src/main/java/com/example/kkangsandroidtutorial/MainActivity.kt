@@ -34,6 +34,11 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         })
 
+        binding.button2.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this ,KeypadActivity::class.java)
+            startActivity(intent)
+        })
+
 
     }
 }
