@@ -386,7 +386,7 @@ fun some(data : String) : Int {
 
 **뷰 객체의 계층 구조**
 
-![Untitled](06%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB%20%E1%84%80%E1%85%AE%E1%84%89%E1%85%A5%E1%86%BC%2074b6e577d23e42fd9e34be17950b0dcf/Untitled.png)
+![Untitled](https://github.com/jordan-comlinee/Kotlin_Study/assets/82654401/ccb034f3-06f2-4a87-9a1f-6ca5a7c50dd9)
 
 - View : 뷰 클래스의 최상위 구조
 - ViewGroup : View의 하위 클래스, 자체 UI가 없어 화면에 나오지 않고 View 여러개를 묶어서 제어할 목적
@@ -511,4 +511,4 @@ class MainActivity : ComponentActivity() {
 
 ### Design
 
-![Untitled](06%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB%20%E1%84%80%E1%85%AE%E1%84%89%E1%85%A5%E1%86%BC%2074b6e577d23e42fd9e34be17950b0dcf/Untitled%201.png)
+![Untitled](https://github.com/jordan-comlinee/Kotlin_Study/assets/82654401/f8061d99-d001-43ae-b77d-6d8c9e35ab86)
