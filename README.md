@@ -512,3 +512,269 @@ class MainActivity : ComponentActivity() {
 ### Design
 
 ![Untitled](https://github.com/jordan-comlinee/Kotlin_Study/assets/82654401/f8061d99-d001-43ae-b77d-6d8c9e35ab86)
+
+# 07 뷰를 배치하는 레이아웃
+
+생성일: 2023년 11월 30일 오후 4:55
+
+# 선형으로 배치 - LinearLayout
+
+### LinearLayout 배치 규칙
+
+LinearLayout : 뷰를 가로 혹은 세로 방향으로 나열하는 레이아웃
+
+- vertical : **세로**로 나열
+- horizontal : **가로**로 나열
+
+### layout_weight
+
+layout_weight : 가중치, 뷰가 차지하는 비율!!
+
+- layout_weight = 3 : layout_weight = 1 일 때 어떤 모습?
+
+### gravity, layout_gravity
+
+gravity : 뷰 정렬, 뷰 내의 내용을 정렬함
+
+layout_gravity : 뷰 정렬, 뷰 자체의 위치를 결정함 + **상위 레이아웃이 이미 방향을 결정하는 경우 적용 불가!**
+
+ 
+
+![Untitled](07%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%87%E1%85%A2%E1%84%8E%E1%85%B5%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%BA%205a85034570c44a50b8aa75c84aa73abf/Untitled.png)
+
+# 상대 위치로 배치 - RelativeLayout
+
+### RelativeLayout 배치 규칙
+
+RelativeLayout : 상대 뷰의 위치를 기준로 정렬하는 레이아웃 클래스
+
+- android:layout_above : 기준 뷰의 위쪽에 배치
+- android:layout_below : 기준 뷰의 아래쪽에 배치
+- android:layout_toLeftOf : 기준 뷰의 왼쪽에 배치
+- android:layout_toRightOf : 기준 뷰의 오른쪽에 배치
+
+### align 속성
+
+align : 배치해야 할 이미지의 크기가 다른데, 어떻게 붙일건지?
+
+- android:layout_alignParentTop : 부모의 뮈쪽에 맞춤
+- android:layout_centerVertical : 부모의 세로방향 중앙에 맞춤
+
+# 겹쳐서 배치 - FrameLayout
+
+### FrameLayout 배치 규칙
+
+FrameLayout : 뷰를 겹쳐서 출력하는 레이아웃, 카드를 쌓듯이 겹쳐 얹어서 출력하는 레이아웃
+
+- 대표적인 예시 : 하단 네비게이션 바 제작할 때
+
+# 표 형태로 배치 - GridLayout
+
+### GridLayout 배치 규칙
+
+GridLayout : 행과 열로 구성된 테이블 화면을 만드는 레이아웃 클래스
+
+- orientation : 방향 설정
+- rowCount : 세로로 나열할 뷰 개수
+- columnCount : 가로로 나열할 뷰 개수
+
+### GridLayout 속성
+
+- 특정 뷰의 위치 조절하기
+    - layout_row :  뷰가 위치하는 세로 방향 인덱스
+    - layout_column : 뷰가 위치하는 가로 방향 인덱스
+- 특정 뷰의 크기 확장하기
+    - layout_gravity : fill_horizontal 옵션有!
+- 열이나 행 병합하기
+    - layout_columnSpan : 가로로 열 병합
+    - layout_rowSpan : 세로로 열 병합
+
+# 계층 구조로 배치 - ConstraintLayout
+
+### ConstraintLayout 배치 규칙
+
+ConstraintLayout : androidx에서 제공하는 라이브러리! RelativeLayout과 유사하나 더 많은 속성 제공
+
+- implementation  ‘androidx.constraintlayout::constraintlayout:2.1.4’ 추가
+
+### 레이아웃 편집기 사용
+
+- 실습을 해 보았던 부분이므로 pass
+
+# 전화 앱의 키패드 화면 만들기
+
+### **코드**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/add"
+            app:tint="#00FF00"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연락처 추가"
+            android:textColor="#00FF00"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="02-120"
+        android:textSize="40dp"/>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:columnCount="3"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="1"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="2"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="3"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="4"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="5"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="6"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="7"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="8"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="9"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="*"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="0"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
+            android:text="#"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:id="@+id/icon_video"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/video"/>
+        <ImageView
+            android:id="@+id/icon_call"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/icon_video"
+            android:src="@drawable/call"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/icon_call"
+            android:src="@drawable/back"/>
+    </RelativeLayout>
+
+</LinearLayout>
+```
+
+### **결과**
+
+![Untitled](07%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%87%E1%85%A2%E1%84%8E%E1%85%B5%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%BA%205a85034570c44a50b8aa75c84aa73abf/Untitled%201.png)
