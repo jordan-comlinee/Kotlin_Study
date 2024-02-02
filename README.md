@@ -778,3 +778,118 @@ ConstraintLayout : androidx에서 제공하는 라이브러리! RelativeLayout�
 ### **결과**
 
 ![Untitled](07%20%E1%84%87%E1%85%B2%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%87%E1%85%A2%E1%84%8E%E1%85%B5%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%BA%205a85034570c44a50b8aa75c84aa73abf/Untitled%201.png)
+
+# 08 사용자 이벤트 처하기
+
+생성일: 2023년 11월 30일 오후 4:56
+
+## 터치와 키 이벤트
+
+### 터치 이벤트
+
+터치 : 앱의 화면에서 발생하는 사용자 이벤트
+
+- ACTION_DOWN : 화면을 손가락으로 누른 순간의 이벤트
+- ACTION_UP : 화면에서 손가락을 떼는 순간의 이벤트
+- ACTION_MOVE : 화면을 손가락으로 누른 채로 이동하는 순간의 이벤트
+
+터치 이벤트 발생 좌표 얻기
+
+onTouchEvent() 함수의 MotionEvent 객체로 얻음!
+
+- x : 이벤트가 발생한 뷰의 X 좌표
+- y : 이벤트가 발생한 뷰의 Y 좌표
+- rawX : 화면의 X 좌표
+- rawY : 화면의 Y 좌표
+
+### 키 이벤트
+
+키 이벤트 : 사용자가 폰의 키를 누르는 순간 발생하는 이벤트
+
+- onKeyDown : 키를 누른 순간의 이벤트
+- onKeyUp : 키를 떼는 순간의 이벤트
+- onKeyLongPress : 키를 오래 누르는 순간의 이벤트
+
+키 이벤트로 처리할 수 있는 기능?
+
+1. 소프트 키보드
+2. 내비게이션 바 (뒤로가기, 홈, 오버뷰)
+
+## 뷰 이벤트
+
+### 뷰 이벤트의 처리 구조
+
+뷰 이벤트 처리?
+
+- 이벤트 소스 : 이벤트가 발생한 객체
+- 이벤트 핸들러 : 이벤트 발생 시 실행할 로직이 구현된 객체
+- 리스너 : 이벤트 소스와 이벤트 핸들러를 연결해주는 함수
+
+### 클릭와 롱클릭 이벤트 처리
+
+클릭 이벤트 : open fun setOnClickListener(l: View.onClickListener?) : Unit
+
+롱클릭 이벤트 : open fun setOnLongClickListener(l: View.onLongClickListener?) : Unit
+
+## 시계 앱의 스톱워치 기능 만들기
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".stopWatchActivity">
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal"
+        android:textSize="60dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:text="Start"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/round_button"
+            android:enabled="false"
+            android:text="Stop"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/round_button"
+            android:enabled="false"
+            android:text="Reset"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+```
