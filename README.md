@@ -893,3 +893,132 @@ onTouchEvent() 함수의 MotionEvent 객체로 얻음!
 
 </RelativeLayout>
 ```
+
+# 09 리소스 활용하기
+
+생성일: 2023년 12월 28일 오후 10:20
+
+## 리소스의 종류와 특징
+
+### 앱 리소스 사용하기
+
+- 리소스 디렉터리명은 고정
+- 리소스 파일명은 values에추가하는 파일 제외 자바 이름 작성 규칙 준수
+- 알파벳 대문자 X!!
+
+리소스 종류
+
+1. animator : 속성 애니메이션 xml
+2. anim : 트윈 애니메이션xml
+3. color : 색상 상태 목록 정의 xml
+4. drawable : 이미지 리소스
+5. mipmap : 앱 실행 아이콘 리소스
+6. layout : 레이아웃 xml
+7. menu : 메뉴 구성 xml
+8. raw : 원시 형태로 이용되는 리소스 파일
+9. values : 단순 값으로 이용되는 리소스
+10. xml : 특정 디렉터리가 정의되지 않은 나머지 xml 파일
+11. font : 글꼴 리소스
+
+리소스 태그 종류
+
+1. shape : 도형 모양 지정. rectangle, oval, line, ring이 있음
+2. corners : 둥근 모서리(shape = rectangle이어야 함)
+3. gradient : 그라데이션 색상 지정
+4. size : 도형의 크기 지정
+5. solid : 도형의 색상 지정
+6. stroke : 도형의 윤곽선 지정
+
+플랫폼 리소스 사용하기 : 안드로이드 플랫폼이 제공하는 리소스, android.R이라는 플랫폼 라이브러리의 R 파일에 등록
+
+## 리소스 조건 설정
+
+### 리소스 조건 설정
+
+리소스를 특정 환경에서만 적용되도록 설정
+
+리소스 디렉터리 이름에서 - 뒤 단어가 리소스 조건
+
+ex) mipmap-mdpi : mdpi 라는조건
+
+### 적용 가능한 기능
+
+1. 화면 회전에 대응하기
+2. 국제 언어 제공하기
+
+## 폰 크기의 호환성
+
+### 논리적인 단위 알아보기
+
+- dp : 스크린의 물리적밀도에 기반을 둔 단위
+- sp : dp와 유사하며, 글꼴 크기에 적용
+- pt : 스크린 크기의 1/72 = 1pt
+- px : 픽셀
+- mm : 밀리미터
+- in : 인치
+
+## 메신저 앱의 인트로 화면 만들기
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/intro"/>
+
+    <TextView
+        android:id="@+id/mainTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/intro_main"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/detailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/intro_detail"/>
+
+    <TextView
+        android:id="@+id/delayTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/intro_delay"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/delayTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_button"
+        android:text="@string/intro_button"
+        android:textColor="#FFFFFF"/>
+
+</RelativeLayout>
+```
+
+![Untitled](09%20%E1%84%85%E1%85%B5%E1%84%89%E1%85%A9%E1%84%89%E1%85%B3%20%E1%84%92%E1%85%AA%E1%86%AF%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%204d45cd889cc54208bd09d5b503acb1e7/Untitled.png)
